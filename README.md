@@ -39,5 +39,8 @@ instance Monomorphicable (Vector a) whre
       Monomorphic xs' -> Monomorphic $ x :- xs'
 ```
 
-`Monomorphic k`{.haskell} is the wrapper type to eliminate the polymorphic part of the types.
+`Monomorphic k` is the wrapper type to eliminate the polymorphic part of the types.
+The `Monomorphicable` type-class provides the functions to convert polymorphic value from/to its monomorphic representation, say `MonomorphicRep k` associated type.
 
+In the example above, `SNat n` can be monomorphically represented by `Int`.
+There are some convenient functions to manipulate monomorphic types and functions. For more detail, see API documentation.
