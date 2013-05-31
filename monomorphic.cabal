@@ -2,7 +2,7 @@
 -- documentation, see http://haskell.org/cabal/users-guide/
 
 name:                monomorphic
-version:             0.0.1.2
+version:             0.0.3.0
 synopsis:            Library to convert polymorphic datatypes to/from its monomorphic represetation
 description:         This library provides the type-class and functions to convert between polymorphic data-types and its monomorphic representation type, such as length-indexed vectors, singletons for type-level natural numbers, etc.
 homepage:            https://github.com/konn/monomorphic
