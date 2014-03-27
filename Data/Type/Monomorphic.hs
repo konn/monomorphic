@@ -1,6 +1,6 @@
 {-# LANGUAGE DataKinds, ExistentialQuantification, FlexibleContexts, GADTs #-}
 {-# LANGUAGE PolyKinds, RankNTypes, TypeFamilies, TypeOperators            #-}
-{-# LANGUAGE UndecidableInstances                                          #-}
+{-# LANGUAGE UndecidableInstances, ImpredicativeTypes                      #-}
 module Data.Type.Monomorphic ( Monomorphic (..), Monomorphicable(..)
                    , demote', demoteComposed, monomorphicCompose
                    , withPolymorhic, liftPoly, viaPoly, (:.:)(..)
