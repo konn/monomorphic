@@ -1,5 +1,6 @@
 The `monomorphic` library
 ==========================
+[![Build Status](https://travis-ci.org/konn/monomorphic.svg)](https://travis-ci.org/konn/monomorphic)
 
 What is this?
 -------------
