@@ -21,6 +21,4 @@ source-repository head
 
 library
   exposed-modules:     Data.Type.Monomorphic
-  -- other-modules:       
   build-depends:       base             >= 2.0 && < 5
-               ,       transformers     >= 0.2 && < 0.5
