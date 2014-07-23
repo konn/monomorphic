@@ -3,7 +3,7 @@
 {-# LANGUAGE TypeOperators, UndecidableInstances                           #-}
 module Data.Type.Monomorphic ( Monomorphic (..), Monomorphicable(..)
                    , demote', demoteComposed, monomorphicCompose
-                   , withPolymorhic, liftPoly, viaPoly, (:.:)(..)
+                   , withPolymorphic, liftPoly, viaPoly, (:.:)(..)
                    ) where
 import Control.Arrow
 
@@ -33,16 +33,16 @@ monomorphicCompose :: f (g a) -> Monomorphic (f :.: g)
 monomorphicCompose = Monomorphic . Comp
 
 -- | Apply dependently-typed function to the monomorphic representation.
-withPolymorhic :: Monomorphicable k
+withPolymorphic :: Monomorphicable k
                => MonomorphicRep k -> (forall a. k a -> b) -> b
-withPolymorhic k trans =
+withPolymorphic k trans =
   case promote k of
     Monomorphic a -> trans a
 
--- | Flipped version of 'withPolymorhic'.
+-- | Flipped version of 'withPolymorphic'.
 liftPoly :: Monomorphicable k
          => (forall a. k a -> b) -> MonomorphicRep k -> b
-liftPoly = flip withPolymorhic
+liftPoly = flip withPolymorphic
 
 -- | Demote the function between polymorphic types into the one between monomorphic one.
 viaPoly :: (Monomorphicable k, Monomorphicable k')
