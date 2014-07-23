@@ -3,25 +3,25 @@
 {-# LANGUAGE TypeOperators, UndecidableInstances                           #-}
 module Data.Type.Monomorphic ( Monomorphic (..), Monomorphicable(..)
                    , demote', demoteComposed, monomorphicCompose
-                   , withPolymorhic, liftPoly, viaPoly, (:.:)(..)
+                   , withPolymorphic, liftPoly, viaPoly, (:.:)(..)
                    ) where
 import Control.Arrow
 
 newtype (:.:) f g a = Comp (f (g a))
 
--- | A wrapper type for polymophic types.
+-- | A wrapper type for polymorphic types.
 data Monomorphic k = forall a. Monomorphic (k a)
 
 -- | A types which have the monomorphic representation.
 class Monomorphicable k where
   -- | Monomorphic representation
   type MonomorphicRep k :: *
-  -- | Promote the monomorphic value to the polymophic one.
+  -- | Promote the monomorphic value to the polymorphic one.
   promote :: MonomorphicRep k -> Monomorphic k
   -- | Demote the polymorphic value to the monomorphic representation.
   demote  :: Monomorphic k -> MonomorphicRep k
 
--- | Convinience function to demote polymorphic types into monomorphic one directly.
+-- | Convenience function to demote polymorphic types into monomorphic one directly.
 demote' :: Monomorphicable k => k a -> MonomorphicRep k
 demote' = demote . Monomorphic
 
@@ -33,18 +33,18 @@ monomorphicCompose :: f (g a) -> Monomorphic (f :.: g)
 monomorphicCompose = Monomorphic . Comp
 
 -- | Apply dependently-typed function to the monomorphic representation.
-withPolymorhic :: Monomorphicable k
+withPolymorphic :: Monomorphicable k
                => MonomorphicRep k -> (forall a. k a -> b) -> b
-withPolymorhic k trans =
+withPolymorphic k trans =
   case promote k of
     Monomorphic a -> trans a
 
--- | Flipped version of 'withPolymorhic'.
+-- | Flipped version of 'withPolymorphic'.
 liftPoly :: Monomorphicable k
          => (forall a. k a -> b) -> MonomorphicRep k -> b
-liftPoly = flip withPolymorhic
+liftPoly = flip withPolymorphic
 
--- | Demote the function between polymorphic types into the one between monomorphic one.
+-- | Demote the function between polymorphic types into the one between monomorphic ones.
 viaPoly :: (Monomorphicable k, Monomorphicable k')
         => (forall x y. k x -> k' y) -> MonomorphicRep k -> MonomorphicRep k'
 viaPoly f a = demote $ Monomorphic $ liftPoly f a
