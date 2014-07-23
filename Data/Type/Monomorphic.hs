@@ -21,7 +21,7 @@ class Monomorphicable k where
   -- | Demote the polymorphic value to the monomorphic representation.
   demote  :: Monomorphic k -> MonomorphicRep k
 
--- | Convinience function to demote polymorphic types into monomorphic one directly.
+-- | Convenience function to demote polymorphic types into monomorphic one directly.
 demote' :: Monomorphicable k => k a -> MonomorphicRep k
 demote' = demote . Monomorphic
 
@@ -44,7 +44,7 @@ liftPoly :: Monomorphicable k
          => (forall a. k a -> b) -> MonomorphicRep k -> b
 liftPoly = flip withPolymorphic
 
--- | Demote the function between polymorphic types into the one between monomorphic one.
+-- | Demote the function between polymorphic types into the one between monomorphic ones.
 viaPoly :: (Monomorphicable k, Monomorphicable k')
         => (forall x y. k x -> k' y) -> MonomorphicRep k -> MonomorphicRep k'
 viaPoly f a = demote $ Monomorphic $ liftPoly f a
