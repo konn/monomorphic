@@ -9,14 +9,14 @@ import Control.Arrow
 
 newtype (:.:) f g a = Comp (f (g a))
 
--- | A wrapper type for polymophic types.
+-- | A wrapper type for polymorphic types.
 data Monomorphic k = forall a. Monomorphic (k a)
 
 -- | A types which have the monomorphic representation.
 class Monomorphicable k where
   -- | Monomorphic representation
   type MonomorphicRep k :: *
-  -- | Promote the monomorphic value to the polymophic one.
+  -- | Promote the monomorphic value to the polymorphic one.
   promote :: MonomorphicRep k -> Monomorphic k
   -- | Demote the polymorphic value to the monomorphic representation.
   demote  :: Monomorphic k -> MonomorphicRep k
