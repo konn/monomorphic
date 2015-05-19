@@ -42,7 +42,7 @@ withPolymorhic k trans =
 -- | Flipped version of 'withPolymorhic'.
 liftPoly :: Monomorphicable k
          => (forall a. k a -> b) -> MonomorphicRep k -> b
-liftPoly = flip withPolymorhic
+liftPoly f m = withPolymorhic m f
 
 -- | Demote the function between polymorphic types into the one between monomorphic one.
 viaPoly :: (Monomorphicable k, Monomorphicable k')
